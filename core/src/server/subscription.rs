@@ -145,6 +145,11 @@ impl SubscriptionMessage {
 		Ok(Self::from_complete_message(json))
 	}
 
+	/// Create a subscription message from an already json serialized string.
+	pub fn new_from_already_serialized(t: &impl AsRef<str>) -> SubscriptionMessage {
+		SubscriptionMessage(SubscriptionMessageInner::NeedsData(t.as_ref().to_string()))
+	}
+
 	pub(crate) fn from_complete_message(msg: String) -> Self {
 		SubscriptionMessage(SubscriptionMessageInner::Complete(msg))
 	}
